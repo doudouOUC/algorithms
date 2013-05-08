@@ -1,0 +1,14 @@
+objects = testGraph.o adjacencyList.o
+terminal = testGraph
+struct = adjacencyList
+
+$(terminal): $(objects)
+	gcc -o $(terminal) $(objects)
+$(terminal).o: $(terminal).c $(struct).h
+	gcc -c $(terminal).c
+$(struct).o: $(struct).c $(struct).h
+	gcc -c $(struct).c
+
+.PHONY: clean
+clean:
+	rm -f *.o

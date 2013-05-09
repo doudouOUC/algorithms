@@ -28,7 +28,7 @@ void createMGraph(MGraph *G)
         scanf("%d,%d,%d", &i, &j, &w);
         G->edges[i][j] = w;
         /* 此处假设是无向图 */
-       // G->edges[j][i] = w;
+        G->edges[j][i] = w;
     }
 }
 

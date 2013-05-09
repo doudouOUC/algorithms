@@ -1,6 +1,6 @@
 
 #define MAXVERNUM 100 //最大顶点数100
-#define INFINITY 65535
+#define INFINITY 200
 typedef char VertexType; //顶点类型设为字符型
 typedef int EdgeType; //边的权值设为整型
 

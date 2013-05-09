@@ -2,7 +2,8 @@
 #include<stdlib.h>
 //#include"adjacencyList.h"
 //#include"traverse.h"
-#include"adjacencyMatrix.h"
+//#include"adjacencyMatrix.h"
+#include"MST.h"
 
 int main()
 {
@@ -17,5 +18,6 @@ int main()
     MGraph *graph = malloc( sizeof(MGraph) );
     createMGraph(graph);
     printMGraph(graph);
+    kruskalMST(graph);
     return 0;
 }

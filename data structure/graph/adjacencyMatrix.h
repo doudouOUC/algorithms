@@ -12,13 +12,6 @@ typedef struct
     int numVertexes, numEdges; //顶点数和边数
 }MGraph;
 
-/*Kruskal 最小生成树需要边结构*/
-typedef struct
-{
-    int begin;
-    int end;
-    int weight;
-}Edge;
 
 /*建立有向图G的邻接矩阵存储*/
 void createMGraph(MGraph *G);

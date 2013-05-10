@@ -81,10 +81,12 @@ void kruskalMST(MGraph *G)
     }
     putchar('\n');
     //边权排序
+    /*
     for(i=0;i<G->numEdges;i++)
     {
         printf(" %d %d %d ", edges[i].begin, edges[i].end, edges[i].weight );
     }
+    */
      
     quickSortEdges(edges, 0, G->numEdges-1);
 
@@ -93,7 +95,6 @@ void kruskalMST(MGraph *G)
     {
         bV = find(parent, edges[i].begin);
         eV = find(parent, edges[i].end);
-       // printf("parent[%d]=%d, parent[%d]=%d\n",edges[i].begin, bV, edges[i].end, eV);
         //最小权边
         if( bV!= eV)
         {

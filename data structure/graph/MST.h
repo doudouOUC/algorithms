@@ -6,7 +6,21 @@ typedef struct
     int begin;
     int end;
     int weight;
-}Edge;
+} Edge;
+
+typedef struct
+{
+    int ver;
+    int key;
+} Vertex;
+
+/* Prime 最小生成树堆结构 */
+typedef struct
+{
+    int size;
+    Vertex *vertexes;
+} MinHeap;
+
 void kruskalMST(MGraph *G);
-void primeMST(MGraph *G);
+void primMST(MGraph *G);
 

@@ -17,7 +17,8 @@ int main()
     */
     MGraph *graph = malloc( sizeof(MGraph) );
     createMGraph(graph);
-    printMGraph(graph);
-    kruskalMST(graph);
+    //printMGraph(graph);
+    //kruskalMST(graph);
+    primMST(graph);
     return 0;
 }

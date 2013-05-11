@@ -2,6 +2,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<assert.h>
+
+#define PARENT(i) (i/2)
+#define LEFT(i) (2*i)
+#define RIGHT(i) (2*i+1)
 
 void swapEdge(Edge *a, Edge *b)
 {
@@ -58,7 +63,6 @@ void kruskalMST(MGraph *G)
     Edge *edges = malloc( sizeof(Edge)*G->numEdges );
     int *parent = malloc( sizeof(int)*G->numVertexes );
     
-
     //初始化联通量
     for(i=0; i< G->numVertexes;i++)
     {
@@ -86,11 +90,9 @@ void kruskalMST(MGraph *G)
     {
         printf(" %d %d %d ", edges[i].begin, edges[i].end, edges[i].weight );
     }
-    */
-     
+    */     
     quickSortEdges(edges, 0, G->numEdges-1);
 
-    //
     for(i =0; i <G->numEdges; i++)
     {
         bV = find(parent, edges[i].begin);
@@ -104,10 +106,154 @@ void kruskalMST(MGraph *G)
             parent[eV] = bV;
         }
     }
+    free(edges);
+    free(parent);
 }
 
 /* Prime 最小生成树算法*/
-void primeMST(MGraph *G)
+//O(n2)
+void primNormal(MGraph *G)
+{
+    int i, j, k, min;
+    int *lowcost = malloc(sizeof(int)*G->numVertexes); //保存相关顶点间编剧权值
+    int *adjvex = malloc(sizeof(int)*G->numVertexes);//保存相关顶点下标
+    /*lowcast 值为0，表示该下标顶点已经加入生成树*/
+    lowcost[0] = 0; 
+    adjvex[0] = 0; 
+    for(i=1;i<G->numVertexes;i++)
+    {
+        lowcost[i] = G->edges[0][i];
+        adjvex[i] = 0;
+    }
+
+    for(i=1;i<G->numVertexes;i++)
+    {
+        j = 0;
+        min = INFINITY;
+        while( j<G->numVertexes )
+        {
+            if(lowcost[j]&&lowcost[j]<min)
+            {
+                min = lowcost[j];
+                k = j;
+            }
+            j++;
+        }
+        printf("(%d,%d)",adjvex[k], k);
+        lowcost[k] = 0;
+        for(j=1; j<G->numVertexes;j++)
+        {
+            if( (lowcost[j]!=0) &&(lowcost[j] >G->edges[k][j]))
+            {
+                lowcost[j] = G->edges[k][j];
+                adjvex[j] = k;
+            }
+        }
+    }
+    free(lowcost);
+    free(adjvex);
+}
+
+
+void build_min_heap(int heap[], int key[])
 {
 
 }
+
+void swap(int *a, int *b)
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void min_heapify(int heap[], int key[],int i, int size)
+{
+    int l, r, minimum;
+    l = LEFT(i);
+    r = right(i);
+    if( l<size && key[heap(l)] <key[heap(i)])
+        minimum = l;
+    else
+        minimum = i;
+    if( r<size &&key[heap(r)] <key[heap(i)])
+        minimum = r;
+    if(minimum !=i)
+    {
+        swap(&heap[i], &heap[minimum]);
+        min_heapify(heap, key, minimum, size);
+    }
+}
+
+void heap_decrease_num(int heap[], int i, int key[], int num)
+{
+    assert( key < heap[i] );
+    key[i] = num;
+    while(i>1 && key([PARENT(i)]) > key[i])
+    {
+        
+    }
+}
+
+int extract_Min(int heap[], int key[], int *size)
+{
+    int min;
+    assert(size>0);
+    min = heap[1];
+    heap[1] = heap[size];
+    size -= 1;
+    heap_heapify(heap, key, 1 ,size);
+    return min;
+}
+
+void primHeap(MGraph *G)
+{
+    int i, j, u, size;
+    int p = malloc(sizeof(int)*G->numVertexes);
+    int key = malloc(sizeof(int)*G->numVertexes);
+    int queue = malloc(sizeof(int)*(G->numVertexes+1));
+    int isInQ = malloc(sizeof(int)*G->numVertexes);//判断是否在队列Q中
+    size = G->numVertexes;
+
+    for(i=0;i<G->numVertexes;i++)
+    {
+        key[i] = INFINITY;
+        p[i] = -1;
+        queue[i+1] = i; //最小堆从1开始
+        isInQ[i] = 1;//初始化 都在Q中
+    }
+    key[0] = 0;
+    isInQ[0] = 0;
+    
+    while(size>0)
+    {
+        u = extract_Min(queue);
+        printf("(%d,%d) %d added", p[u], u, key[u]);
+        isInQ[u] = 0;
+        for(i=0;i<G->numVertexes;i++)
+        {
+            if(G->edges[u][i]!=INFINITY)
+            {
+                if(isInQ(i) && G->edges[u][i]<key[v])
+                {
+                    p[i] = u;
+                    key[v] = G->edges[u][i];
+                    
+                }
+            }
+        } 
+    }
+}
+
+void primHeap(MGraph *G)
+{
+    
+}
+
+
+void primMST(MGraph *G)
+{
+    primNormal(G);
+}
+

@@ -1,0 +1,14 @@
+objects = testBell.o adjacencyList.o bellman-ford.o
+
+result:$(objects)
+	gcc -o result $(objects)
+testBell.o: testBell.c  bellman-ford.h
+	gcc -c -g testBell.c
+adjacencyList.o: adjacencyList.c adjacencyList.h
+	gcc -c adjacencyList.c
+bellman-ford.o: bellman-ford.c bellman-ford.h
+	gcc -c -g bellman-ford.c
+
+.PHONY:clean
+clean:
+	rm -f *.o

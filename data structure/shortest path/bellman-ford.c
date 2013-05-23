@@ -12,6 +12,7 @@ void initialize_single_source(ALGraph *G, int s)
         d[i] = INFINITY;
         p[i] = -1;
     }
+    p[s] = s;
     d[s] = 0;
 }
 
@@ -59,7 +60,17 @@ int bellman_ford(ALGraph *G, int s)
 
 void printshortestPath(ALGraph *G, int s)
 {
-    int i;
+    int i, j;
     for(i=0;i<G->n;i++)
-        printf("%d-%d = %d\n", s, i, d[i]);
+    {
+        printf("%d to %d = %d\n", s, i, d[i]);
+        j=i;
+        while(p[j]!=s)
+        {
+            printf("%d-%d ",j, p[j]);
+            j = p[j];
+        }
+        printf("%d-%d ", j, p[j]);
+        putchar('\n');
+    }
 }

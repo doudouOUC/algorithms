@@ -1,18 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
-//#include"bellman-ford.h"
-#include"dijkstra.h"
+#include"bellman-ford.h"
 
 int main()
 {
-    MGraph *graph = malloc(sizeof(MGraph));
-    createMGraph(graph);
-    printMGraph(graph);
-    dijkstra(graph, 0);
-    printShortestPath(graph,0);
-
-    /*
-    int test;
     ALGraph *graph = malloc(sizeof(ALGraph));
     createALGraph(graph);
     printGraph(graph);
@@ -25,7 +16,7 @@ int main()
     {
         printf("there is a negative circle\n");
     }
-    
+    /* 
     test = -1;
     if(test)
     {

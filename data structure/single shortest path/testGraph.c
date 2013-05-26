@@ -8,7 +8,8 @@ int main()
     MGraph *graph = malloc(sizeof(MGraph));
     createMGraph(graph);
     printMGraph(graph);
-    dijkstra(graph, 0);
+    //dijkstra(graph, 0);
+    dijkstra_normal(graph,0);
     printShortestPath(graph,0);
 
     /*

@@ -123,10 +123,38 @@ void dijkstra(MGraph *G, int s)
 
 void dijkstra_normal(MGraph *G, int s)
 { 
-    int i ,j, *set;
-    int minDis,minNode;
+    printf("This is dijkstra O(n2)\n");
+    int i ,j, u, *set, min;
     initialize_single_source(G, s);
     set = malloc(sizeof(int)*G->numVertexes);
+    for(i=0;i<G->numVertexes;i++)
+    {
+        set[i] = 0;
+    }
+    for(i=0;i<G->numVertexes;i++)
+    {
+        min = INFINITY;
+        for(j=0;j<G->numVertexes;j++)
+        {
+            if((set[j]==0) && d[j] < min)
+            {
+                u = j;
+                min = d[j];
+            }
+        }
+        set[u] = 1;
+        for(j=0;j<G->numVertexes;j++)
+        {
+            if(G->edges[u][j] != INFINITY)
+            {
+                if(d[j] > d[u] +G->edges[u][j])
+                {
+                    d[j] = d[u] + G->edges[u][j];
+                    p[j] = u;
+                }
+            }
+        }
+    }
 }
 
 void printShortestPath(MGraph *G, int s)

@@ -41,4 +41,5 @@ void printMGraph(MGraph *G)
             printf("%5d ", G->edges[i][j]);
         printf("\n");
     }
+    putchar('\n');
 }

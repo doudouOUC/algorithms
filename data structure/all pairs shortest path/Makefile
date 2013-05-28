@@ -1,11 +1,11 @@
-objects = matrixSP.o adjacencyMatrix.o testMatrixSp.o
+objects = floyd-warshall.o adjacencyMatrix.o testFloyd.o
 
 result:$(objects)
 	gcc -o result $(objects)
-testMatrixSp.o:  matrixSP.h testMatrixSp.c
-	gcc -c testMatrixSp.c
-matrixSP.o: matrixSP.h matrixSP.c
-	gcc -c matrixSP.c
+testFloyd.o:  floyd-warshall.h testFloyd.c
+	gcc -c testFloyd.c
+floyd-warshall.o: floyd-warshall.h floyd-warshall.c
+	gcc -c floyd-warshall.c
 adjacencyMatrix.o: adjacencyMatrix.h adjacencyMatrix.c
 	gcc -c adjacencyMatrix.c
 .PHONY:clean

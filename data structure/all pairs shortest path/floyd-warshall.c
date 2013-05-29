@@ -58,7 +58,6 @@ void floyd_warshall(MGraph *G)
     int W[MAXVERNUM][MAXVERNUM];
     int D[MAXVERNUM][MAXVERNUM];
     int P[MAXVERNUM][MAXVERNUM];
-    int PTemp[MAXVERNUM][MAXVERNUM];
     n = G->numVertexes;
     memcpy(W,G->edges,sizeof(W));
     //initial W i =j Wij = 0
@@ -88,7 +87,6 @@ void floyd_warshall(MGraph *G)
                 if(D[i][j] <= D[i][k] +D[k][j])
                 {
                     D[i][j] = D[i][j];
-                   // PTemp[i][j] = P[i][j];
                 }
                 else
                 {
@@ -105,7 +103,6 @@ void floyd_warshall(MGraph *G)
 
             }
         }
-        //memcpy(P,PTemp,sizeof(PTemp));
     }
     printPairsSP(D, P, n);
 }

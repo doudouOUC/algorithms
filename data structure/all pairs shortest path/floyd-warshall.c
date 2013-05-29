@@ -10,6 +10,15 @@ int min(int a, int b)
         return b;
 }
 
+//递归输出两点间路径
+void printPath(int P[][MAXVERNUM], int i, int j)
+{
+    if(P[i][j] == -1)
+        return;
+    printPath(P, i, P[i][j]);
+    printf("%d-%d ", P[i][j], j);
+}
+
 void printPairsSP(int D[][MAXVERNUM], int P[][MAXVERNUM], int n)
 {
     int i, j;
@@ -32,20 +41,15 @@ void printPairsSP(int D[][MAXVERNUM], int P[][MAXVERNUM], int n)
         putchar('\n');
     }
     putchar('\n');
-}
 
-void printP(int P[][MAXVERNUM], int n)
-{
-    int i, j;
     for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
         {
-            printf(" %4d", P[i][j]);
+            printPath(P,i,j);
+            printf(" d=%d\n", D[i][j]);
         }
-        putchar('\n');
     }
-    putchar('\n');
 }
 
 void floyd_warshall(MGraph *G)
@@ -65,23 +69,23 @@ void floyd_warshall(MGraph *G)
     for(i=0;i<n;i++)
     {
         for(j=0;j<n;j++)
-        {
-            
-            if(W[i][j] == INFINITY || i==j)
-                P[i][j] = -1;
-            else
+        {         
+            if( i!=j && W[i][j] != INFINITY)
                 P[i][j] = i;
+            else
+                P[i][j] = -1;
                 
         }
     }
-    printP(P,n);
     for(k=0;k<n;k++)
     {
         for(i=0;i<n;i++)
         {
             for(j=0;j<n;j++)
             {
-                if(D[i][j] < D[i][k] +D[k][j])
+                //前趋子图的时候这个地方判断错了，应该是<= 
+                /*
+                if(D[i][j] <= D[i][k] +D[k][j])
                 {
                     D[i][j] = D[i][j];
                    // PTemp[i][j] = P[i][j];
@@ -89,13 +93,18 @@ void floyd_warshall(MGraph *G)
                 else
                 {
                     D[i][j] = D[i][k]+D[k][j];
-                    P[i][k] = i;
-                    P[i][j] = k;
+                    P[i][j] = P[k][j];
+                }
+                */
+                //改成现在形式更简单
+                if(D[i][j] > D[i][k] +D[k][j])
+                {
+                    D[i][j] = D[i][k]+D[k][j];
+                    P[i][j] = P[k][j];
                 }
 
             }
         }
-        printP(P,n );
         //memcpy(P,PTemp,sizeof(PTemp));
     }
     printPairsSP(D, P, n);

@@ -7,7 +7,7 @@ int swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
-
+/*
 int partition(int sort[], int p, int r)
 {
     int guard = sort[r], i, j;
@@ -22,6 +22,23 @@ int partition(int sort[], int p, int r)
     }
     swap(&sort[i+1], &sort[r]);
     return i+1;
+}
+*/
+
+int partition(int sort[], int p, int r)
+{
+    int guard = sort[r], i, j;
+    i = p - 1;
+    for(j = p; j <= r; j++)
+    {
+        if( sort[j] <= guard )
+        {
+            i = i+1;
+            swap( &sort[j], &sort[i]);
+        }
+    }
+    //swap(&sort[i+1], &sort[r]);
+    return i;
 }
 
 void quickSort(int sort[], int p, int r)

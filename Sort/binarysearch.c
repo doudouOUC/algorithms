@@ -1,7 +1,7 @@
 /*************************************************************************
     > File Name: binarysearch.c
-    > Author: jinye
-    > Mail: jinye.djy@alibaba-inc.com
+    > Author: djy
+    > Mail: djy1989418@126.com
     > Created Time: Sun 11 Jan 2015 03:24:50 PM CST
  ************************************************************************/
 
